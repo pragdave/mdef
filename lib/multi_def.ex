@@ -10,7 +10,7 @@ defmodule MultiDef do
           mdef fred do
             { :init, val }   -> fred {:double, val}
             { :double, val } -> IO.puts(val*2)
-            a, b             -> a+b
+            a, b when a < b  -> a+b
           end
         end
 
@@ -23,10 +23,21 @@ defmodule MultiDef do
   """
   defmacro mdef({name, _line, nil}, [do: clauses]) do
     for {:->, _line, [args, body]} <- clauses do
-      quote do
-        def unquote(name)(unquote_splicing(args)) do
-          unquote(body)
-        end
+      case args do
+        [{:when, _, when_clause}] -> #[arglist, condition]}] ->
+          [ condition | rargs ] = Enum.reverse(when_clause)
+          arglist = Enum.reverse(rargs)
+          quote do
+            def unquote(name)(unquote_splicing(arglist)) when(unquote(condition)) do
+              unquote(body)
+            end
+          end
+        _ ->
+          quote do
+            def unquote(name)(unquote_splicing(args)) do
+              unquote(body)
+            end
+          end
       end
     end
   end
