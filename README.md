@@ -12,7 +12,7 @@ Use it like this:
         mdef fred do
           { :init, val }   -> fred {:double, val}
           { :double, val } -> IO.puts(val*2)
-          a, b             -> a+b
+          a, b when a < b  -> a+b
         end
       end
 
