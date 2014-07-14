@@ -9,24 +9,37 @@ Use it like this:
 
         import MultiDef
 
-        mdef fred do
-          { :init, val }   -> fred {:double, val}
-          { :double, val } -> IO.puts(val*2)
-          a, b when a < b  -> a+b
+        mdef fib do
+          0 -> 0
+          1 -> 1
+          n -> fib(n-1) + fib(n-1)
         end
       end
 
-      IO.inspect Test.fred 1, 2          #=> 3
-      IO.inspect Test.fred { :init, 4 }  #=> 8
+      IO.puts Test.fib(20)
+
+When clauses can be used:
+
+      defmodule Test do
+
+        import MultiDef
+
+        mdef fib do
+          0 -> 0
+          1 -> 1
+          n when n > 0 -> fib(n-1) + fib(n-1)
+        end
+      end
+
+      IO.puts Test.fib(20)
 
 Does not support default arguments.
 
 Does not enforce that all heads have the same arity (deliberately).
 
-
 ----
 
-Copyright © 2014 Dave Thomas, The Pragmatic Programmers
+Copyright © 2014 Dave Thomas, The Pragmatic Programmers  
 @/+pragdave, dave@pragprog.com
 
 Licensed under the same terms as Elixir
