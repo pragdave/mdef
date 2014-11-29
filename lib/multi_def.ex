@@ -1,5 +1,4 @@
 defmodule MultiDef do
-
   @doc """
   Define a function with multiple heads. Use it like this:
 
@@ -41,5 +40,4 @@ defmodule MultiDef do
       end
     end
   end
-
 end
