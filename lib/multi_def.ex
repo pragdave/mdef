@@ -40,4 +40,26 @@ defmodule MultiDef do
       end
     end
   end
+
+  defmacro mdefp({name, _line, nil}, [do: clauses]) do
+    for {:->, _line, [args, body]} <- clauses do
+      case args do
+        [{:when, _, when_clause}] -> #[arglist, condition]}] ->
+          [ condition | rargs ] = Enum.reverse(when_clause)
+          arglist = Enum.reverse(rargs)
+          quote do
+            defp unquote(name)(unquote_splicing(arglist)) when(unquote(condition)) do
+              unquote(body)
+            end
+          end
+        _ ->
+          quote do
+            defp unquote(name)(unquote_splicing(args)) do
+              unquote(body)
+            end
+          end
+      end
+    end
+  end
+
 end
