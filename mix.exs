@@ -4,8 +4,8 @@ defmodule Mdef.Mixfile do
   def project do
     [
      app:         :multidef,
-     version:     "0.2.0",
-     elixir:      "~> 0.14",
+     version:     "0.3.0",
+     elixir:      "~> 1.0",
      deps:        [],
      description: description,
      package:     package,
@@ -40,13 +40,11 @@ defmodule Mdef.Mixfile do
   defp package do
     [
       files:        [ "lib", "priv", "mix.exs", "README.md" ],
-      contributors: [ "Dave Thomas <dave@pragprog.org>"],
+      contributors: [ "Dave Thomas <dave@pragprog.org>", "Lennart Fridén <lennart@devl.se>"],
       licenses:     [ "Same as Elixir" ],
       links:        %{
                        "GitHub" => "https://github.com/pragdave/mdef",
                     }
     ]
   end
-
-
 end
