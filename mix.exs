@@ -4,8 +4,8 @@ defmodule Mdef.Mixfile do
   def project do
     [
      app:         :multidef,
-     version:     "0.2.0",
-     elixir:      "~> 0.14",
+     version:     "0.3.0",
+     elixir:      ">= 1.0.0",
      deps:        [],
      description: description,
      package:     package,

@@ -22,6 +22,19 @@ defmodule MultiDef do
   Does not enforce that all heads have the same arity (deliberately).
   """
   defmacro mdef({name, _line, nil}, [do: clauses]) do
+    define_multi(name, clauses)
+  end
+
+  @doc """
+  Same as `mdef`, but defines a private function.
+  """
+  defmacro mdefp({name, _line, nil}, [do: clauses]) do
+    define_multi(name, clauses)
+    |> Enum.map(fn {:def, context, content} -> {:defp, context, content } end)
+  end
+
+  
+  defp define_multi(name, clauses) do
     for {:->, _line, [args, body]} <- clauses do
       case args do
         [{:when, _, when_clause}] -> #[arglist, condition]}] ->
