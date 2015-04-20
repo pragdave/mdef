@@ -1,3 +1,7 @@
+## V0.2.1 – April 19, 2015
+
+* Change Elixir version to ~1.0
+
 ## V0.2.0 – July 12, 2014
 
 * Support `when` clauses
