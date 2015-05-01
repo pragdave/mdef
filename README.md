@@ -12,7 +12,7 @@ Use it like this:
         mdef fib do
           0 -> 0
           1 -> 1
-          n -> fib(n-1) + fib(n-1)
+          n -> fib(n-1) + fib(n-2)
         end
       end
 
@@ -27,7 +27,7 @@ When clauses can be used:
         mdef fib do
           0 -> 0
           1 -> 1
-          n when n > 0 -> fib(n-1) + fib(n-1)
+          n when n > 0 -> fib(n-1) + fib(n-2)
         end
       end
 
