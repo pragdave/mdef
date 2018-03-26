@@ -11,6 +11,16 @@ defmodule MultiDefTest do
       { :double, val } -> val*2
       a, b, c when a < b  -> a+b+c
     end
+
+    mdefp fredp do
+      a when a < 10 -> 1
+      _ -> 10
+    end
+
+    def fredw args do
+      args
+      |> fredp
+    end
   end
 
   test "Single args" do
@@ -19,6 +29,11 @@ defmodule MultiDefTest do
   
   test "Multiple args" do
     assert Test.fred(4, 5, 6) == 15
+  end
+
+  test "Private def" do
+    assert Test.fredw(3) == 1
+    assert Test.fredw(50) == 10
   end
 
   test "When clauses" do
