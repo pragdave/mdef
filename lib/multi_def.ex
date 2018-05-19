@@ -1,5 +1,4 @@
 defmodule MultiDef do
-
   @doc """
   Define a function with multiple heads. Use it like this:
 
@@ -21,17 +20,21 @@ defmodule MultiDef do
 
   Does not enforce that all heads have the same arity (deliberately).
   """
-  defmacro mdef({name, _line, nil}, [do: clauses]) do
+  defmacro mdef({name, _line, nil}, do: clauses) do
     for {:->, _line, [args, body]} <- clauses do
       case args do
-        [{:when, _, when_clause}] -> #[arglist, condition]}] ->
-          [ condition | rargs ] = Enum.reverse(when_clause)
+        # [arglist, condition]}] ->
+        [{:when, _, when_clause}] ->
+          [condition | rargs] = Enum.reverse(when_clause)
           arglist = Enum.reverse(rargs)
+
           quote do
-            def unquote(name)(unquote_splicing(arglist)) when(unquote(condition)) do
+            def unquote(name)(unquote_splicing(arglist))
+                when unquote(condition) do
               unquote(body)
             end
           end
+
         _ ->
           quote do
             def unquote(name)(unquote_splicing(args)) do
@@ -42,17 +45,21 @@ defmodule MultiDef do
     end
   end
 
-  defmacro mdefp({name, _line, nil}, [do: clauses]) do
+  defmacro mdefp({name, _line, nil}, do: clauses) do
     for {:->, _line, [args, body]} <- clauses do
       case args do
-        [{:when, _, when_clause}] -> #[arglist, condition]}] ->
-          [ condition | rargs ] = Enum.reverse(when_clause)
+        # [arglist, condition]}] ->
+        [{:when, _, when_clause}] ->
+          [condition | rargs] = Enum.reverse(when_clause)
           arglist = Enum.reverse(rargs)
+
           quote do
-            defp unquote(name)(unquote_splicing(arglist)) when(unquote(condition)) do
+            defp unquote(name)(unquote_splicing(arglist))
+                 when unquote(condition) do
               unquote(body)
             end
           end
+
         _ ->
           quote do
             defp unquote(name)(unquote_splicing(args)) do
@@ -62,5 +69,4 @@ defmodule MultiDef do
       end
     end
   end
-
 end
