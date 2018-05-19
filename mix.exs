@@ -3,12 +3,12 @@ defmodule Mdef.Mixfile do
 
   def project do
     [
-     app:         :multidef,
-     version:     "0.2.1",
-     elixir:      "~> 1.0",
-     deps:        [],
-     description: description,
-     package:     package,
+      app: :multidef,
+      version: "0.2.1",
+      elixir: "~> 1.0",
+      deps: [],
+      description: description(),
+      package: package()
     ]
   end
 
@@ -39,14 +39,12 @@ defmodule Mdef.Mixfile do
 
   defp package do
     [
-      files:        [ "lib", "priv", "mix.exs", "README.md" ],
-      contributors: [ "Dave Thomas <dave@pragprog.org>"],
-      licenses:     [ "Same as Elixir" ],
-      links:        %{
-                       "GitHub" => "https://github.com/pragdave/mdef",
-                    }
+      files: ["lib", "priv", "mix.exs", "README.md"],
+      contributors: ["Dave Thomas <dave@pragprog.org>"],
+      licenses: ["Same as Elixir"],
+      links: %{
+        "GitHub" => "https://github.com/pragdave/mdef"
+      }
     ]
   end
-
-
 end
