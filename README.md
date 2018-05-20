@@ -3,6 +3,10 @@ MultiDef—Define a function with multiple heads
 
 Add the dependency `{:multidef, "> 0.0.0"}` to mix.exs.
 
+Makes available two macros, mdef and mdefp, for public (mdef)
+or private (mdefp) multiple function heads that support different
+arity.
+
 Use it like this:
 
       defmodule Test do
@@ -12,7 +16,13 @@ Use it like this:
         mdef fib do
           0 -> 0
           1 -> 1
-          n -> fib(n-1) + fib(n-1)
+          n -> fib(n-1) + fib(n-2)
+        end
+
+        mdefp fib_private do
+          0 -> 0
+          1 -> 1
+          n -> fib(n-1) + fib(n-2)
         end
       end
 
@@ -27,7 +37,7 @@ When clauses can be used:
         mdef fib do
           0 -> 0
           1 -> 1
-          n when n > 0 -> fib(n-1) + fib(n-1)
+          n when n > 0 -> fib(n-1) + fib(n-2)
         end
       end
 
