@@ -5,33 +5,41 @@ Add the dependency `{:multidef, "> 0.0.0"}` to mix.exs.
 
 Use it like this:
 
-      defmodule Test do
+```elixir
+defmodule Test do
 
-        import MultiDef
+  import MultiDef
 
-        mdef fib do
-          0 -> 0
-          1 -> 1
-          n -> fib(n-1) + fib(n-1)
-        end
-      end
+  mdef fib do
+    0 -> 0
+    1 -> 1
+    n -> fib(n-1) + fib(n-1)
+  end
+end
+```
 
-      IO.puts Test.fib(20)
+```elixir
+IO.puts Test.fib(20)
+```
 
 When clauses can be used:
 
-      defmodule Test do
+```elixir
+defmodule Test do
 
-        import MultiDef
+  import MultiDef
 
-        mdef fib do
-          0 -> 0
-          1 -> 1
-          n when n > 0 -> fib(n-1) + fib(n-1)
-        end
-      end
+  mdef fib do
+    0 -> 0
+    1 -> 1
+    n when n > 0 -> fib(n-1) + fib(n-1)
+  end
+end
+```
 
-      IO.puts Test.fib(20)
+```elixir
+IO.puts Test.fib(20)
+```
 
 Does not support default arguments.
 
